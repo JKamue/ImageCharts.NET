@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageCharts.NET", "ImageCharts.NET\ImageCharts.NET.csproj", "{968BE1EB-E872-4B3E-97A6-BD8002025730}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageCharts.NET.Samples", "ImageCharts.NET.Samples\ImageCharts.NET.Samples.csproj", "{18B0EE34-2D63-47EA-8BAB-DDB31A209CCA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{968BE1EB-E872-4B3E-97A6-BD8002025730}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{968BE1EB-E872-4B3E-97A6-BD8002025730}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{968BE1EB-E872-4B3E-97A6-BD8002025730}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18B0EE34-2D63-47EA-8BAB-DDB31A209CCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18B0EE34-2D63-47EA-8BAB-DDB31A209CCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18B0EE34-2D63-47EA-8BAB-DDB31A209CCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18B0EE34-2D63-47EA-8BAB-DDB31A209CCA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
