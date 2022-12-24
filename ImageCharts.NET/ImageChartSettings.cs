@@ -17,7 +17,7 @@ public class ImageChartSettings
         _path = "chart";
     }
 
-    public ImageChartSettings(int timeout, string host, string scheme, int port, string path)
+    public ImageChartSettings(string host, string scheme, int port, string path, int timeout = 8000)
     {
         Timeout = timeout;
         _host = host;
