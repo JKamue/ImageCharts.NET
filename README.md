@@ -29,7 +29,7 @@ Make sure to set `API Endpoint` to `/chart`.
 Once you have a layout you are happy with you can put it into code by using the tag names as methods and passing their value as a string in the parameters.
 
 ### Add ImageCharts.NET to your project
-You can download ImageCharts.NET on [nuget](https://www.nuget.org/packages/ImageCharts.NET).
+You can download ImageCharts.NET on [NuGet](https://www.nuget.org/packages/ImageCharts.NET): `dotnet add package ImageCharts.NET`
 
 ### Put your chart into code
 These are the values used in the chart designer to create a basic rounded bar chart.
