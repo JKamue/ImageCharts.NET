@@ -6,21 +6,46 @@ using System.Text.Json.Nodes;
 
 namespace ImageCharts.NET;
 
+/// <summary>
+/// <c>ImageCharts</c> can be used to create different types of charts.
+/// For more information on the various commands visit <c>https://documentation.image-charts.com/</c>
+/// </summary>
 public class ImageChart
 {
     private readonly ImageChartSettings _settings;
     private readonly Dictionary<string, string> _parameters = new();
 
+    /// <summary>
+    /// Creates an <c>ImageCharts</c> instance.
+    /// </summary>
     public ImageChart()
     {
         _settings = new ImageChartSettings();
     }
     
+    /// <summary>
+    /// Creates an <c>ImageCharts</c> instance with custom settings.
+    /// If you want to use the default settings call <c>ImageCharts</c> with an empty constructor instead.
+    /// </summary>
     public ImageChart(ImageChartSettings settings)
     {
         _settings = settings;
     }
 
+    /// <summary>
+    /// Creates an Image-Charts API url.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// Please note that this is not recommended for large datasets.
+    /// Otherwise the URL might go above the max URL length of various programs.
+    /// You should use
+    /// <see cref="toBufferAsync"/>,
+    /// <see cref="toFileAsync"/> or
+    /// <see cref="toDataURIAsync"/>
+    /// instead. These use POST Requests for requests up to 300 Kilobytes long.
+    /// </para>
+    /// </remarks>
     public string toURL()
     {
         var queryParameters = System.Web.HttpUtility.ParseQueryString(string.Empty);
@@ -33,6 +58,9 @@ public class ImageChart
         return $"{_settings.GetUri()}?{queryParameters}";
     }
 
+    /// <summary>
+    /// Asynchronously creates a buffer containing the chart
+    /// </summary>
     public async Task<byte[]> toBufferAsync()
     {
         using var client = new HttpClient();
@@ -102,12 +130,21 @@ public class ImageChart
             : string.Join(" and ", errorList);
     }
 
+    /// <summary>
+    /// Asynchronously generates the chart and stores it at a custom location
+    /// </summary>
+    /// <param name="path">
+    /// The path and name to store the file at
+    /// </param>
     public async Task toFileAsync(string path)
     {
         var imageAsBuffer = await toBufferAsync();
         await File.WriteAllBytesAsync(path, imageAsBuffer);
     }
 
+    /// <summary>
+    /// Asynchronously generates the chart and returns it as a base64 encoded string
+    /// </summary>
     public async Task<string> toDataURIAsync()
     {
         var fileFormat = _parameters.ContainsKey("chan")
@@ -119,11 +156,23 @@ public class ImageChart
         
         return $"data:image/{fileFormat};base64,{encodedImage}";
     }
-
+    
+    /// <summary>
+    /// Creates a buffer containing the chart
+    /// </summary>
     public byte[] toBuffer() => toBufferAsync().Result;
 
+    /// <summary>
+    /// Generates the chart and stores it at a custom location
+    /// </summary>
+    /// <param name="path">
+    /// The path and name to store the file at
+    /// </param>
     public void toFile(string path) => toFileAsync(path).Wait();
 
+    /// <summary>
+    /// Generates the chart and returns it as a base64 encoded string
+    /// </summary>
     public string toDataURI() => toDataURIAsync().Result;
     
     private ImageChart AddKey(string key, string value)
