@@ -7,4 +7,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\ImageCharts.NET\ImageCharts.NET.csproj" />
+    </ItemGroup>
+
 </Project>
