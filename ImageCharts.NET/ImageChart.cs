@@ -1,4 +1,8 @@
-﻿using System.Collections.Specialized;
+﻿using System.Collections;
+using System.Collections.Specialized;
+using System.Diagnostics.CodeAnalysis;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 
 namespace ImageCharts.NET;
 
@@ -39,9 +43,63 @@ public class ImageChart
         var formContent = new FormUrlEncodedContent(parametersAsKeyValuePair);
         
         var result = await client.PostAsync(_settings.GetUri(), formContent);
-        result.EnsureSuccessStatusCode();
+        if (result.IsSuccessStatusCode)
+            return await result.Content.ReadAsByteArrayAsync();
 
-        return await result.Content.ReadAsByteArrayAsync();
+        var errorMessage = GenerateErrorMessage(result);
+        throw new ImageChartException(errorMessage);
+    }
+
+    private string GenerateErrorMessage(HttpResponseMessage result)
+    {
+        var defaultErrorMessage = 
+            "Chart generation failed with HTTP response code " +
+            $"\"{(int) result.StatusCode}: {result.StatusCode}\". " +
+            "No further information provided";
+        
+        IEnumerable<string>? values;
+        if (!result.Headers.TryGetValues("x-ic-error-validation", out values))
+            return defaultErrorMessage;
+        
+        var enumerable = values as string[] ?? values.ToArray();
+        if (!enumerable.Any())
+            return defaultErrorMessage;
+        
+        var imageChartErrorListAsJson = enumerable.First();
+        var imageChartErrorList = JsonNode.Parse(imageChartErrorListAsJson);
+
+        if (imageChartErrorList is null)
+            return defaultErrorMessage;
+        
+        var errorList = new List<string?>();
+        foreach (var imageChartErrorNode in imageChartErrorList.AsArray())
+        {
+            if (imageChartErrorNode is not JsonObject imageChartErrorObject)
+                continue;
+
+            if (!imageChartErrorObject.ContainsKey("message"))
+                continue;
+
+            if (imageChartErrorObject["message"] is null)
+                continue;
+
+            var message = imageChartErrorObject["message"];
+            
+            if (message is null)
+                continue;
+            
+            if (!message.AsValue().TryGetValue<string>(out var errorMessage))
+                continue;
+            
+            if (string.IsNullOrWhiteSpace(errorMessage))
+                continue;
+            
+            errorList.Add(errorMessage);
+        }
+        
+        return errorList.Count == 0 
+            ? defaultErrorMessage 
+            : string.Join(" and ", errorList);
     }
 
     public async Task toFileAsync(string path)
