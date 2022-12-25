@@ -4,6 +4,20 @@
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <Version />
+        <Title>ImageCharts.NET</Title>
+        <Authors>JKamue</Authors>
+        <Description>ImageCharts.NET utilizes the Image-Charts API to headlessly create charts for use in websites, emails, chatbots and more</Description>
+        <PackageProjectUrl>https://github.com/JKamue/ImageCharts.NET</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/JKamue/ImageCharts.NET/blob/main/LICENSE</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/JKamue/ImageCharts.NET</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>chart charts url image imagecharts imagecharts.net api png jpg gif generator line bar pie bubble polar</PackageTags>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="../README.md" Pack="true" PackagePath="\"/>
+    </ItemGroup>
 
 </Project>
