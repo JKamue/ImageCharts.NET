@@ -70,3 +70,10 @@ var base64EncodedChart = await myFirstChart.toDataURIAsync();
 var chartInBuffer = await myFirstChart.toBufferAsync();
 ```
 
+The urlToImage variable for example will contain the path to generate the specified chart, visualized below.
+
+`https://image-charts.com/chart?chbr=10&chd=t%3a10%2c40%2c60%2c80%2c30%2c20&chf=b0%2clg%2c0%2cfdb45c%2c0%2ced7e30%2c1&chs=700x125&cht=bvs&chxt=y%2cx`
+
+<p align="center">
+  <img src="https://image-charts.com/chart?chbr=10&chd=t%3a10%2c40%2c60%2c80%2c30%2c20&chf=b0%2clg%2c0%2cfdb45c%2c0%2ced7e30%2c1&chs=700x125&cht=bvs&chxt=y%2cx">
+</p>
