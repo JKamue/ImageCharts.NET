@@ -9,10 +9,10 @@ It can be used to effortlessly create charts or URLs to charts in the backend he
 
 I am aware of the official [image-charts/c-sharp](https://github.com/image-charts/c-sharp) library. I created this custom implementation of the API because I think the official library lacks not only a license but also two very important features:
 
- 1. POST Requests
-By default image charts have all relevant settings to generate the chart encoded in the URL. This leads to issues with URL length when visualizing larger datasets. That is why the Image-Charts Api [provides the option](https://github.com/image-charts/c-sharp) to create charts through POST requests. This feature is sadly not implemented in the original [image-charts/c-sharp](https://github.com/image-charts/c-sharp) library. ImageCharts.NET on the other hand has built in support for POST requests, allowing for charts up to 300 Kilobytes long.
+ 1. **POST Requests**:
+By default image charts have all relevant settings to generate the chart encoded in the URL. This leads to issues with URL length when visualizing larger datasets. That is why the Image-Charts Api [provides the option](https://documentation.image-charts.com/reference/post-requests/) to create charts through POST requests. This feature is sadly not implemented in the original [image-charts/c-sharp](https://github.com/image-charts/c-sharp) library. ImageCharts.NET on the other hand has built in support for POST requests, allowing for charts up to 300 Kilobytes long.
 
- 2. Asynchronous Usage
+ 2. **Asynchronous Usage:**
 Being a headless chart generation API Image-Charts will often be used in the backend to server charts to users through emails, websited or interactive chat bots. The original [image-charts/c-sharp](https://github.com/image-charts/c-sharp) library does only offer synchronous usage that will for example block a chatbots other conversations while generating a chart. ImageCharts.NET has been built with asynchronous usage in mind.
 
 Switching from [image-charts/c-sharp](https://github.com/image-charts/c-sharp) to ImageCharts.NET is an easy stressfree process. Methods have been named identically on purpose. There are barely any breaking changes and you can seamlessly transition and start using POST Requests asynchronously.
